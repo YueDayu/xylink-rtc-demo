@@ -7,7 +7,7 @@
 
  // 默认第三方是prd环境
 export const ENV: 'PRE' | 'PRD' | 'TXDEV' = 'PRD';
-export const THIRD: boolean = true;
+export const THIRD: boolean = false;
 
 const SERVER_MAP: any = {
 	TXDEV: {

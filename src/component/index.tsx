@@ -4,8 +4,8 @@ import { Button, Row, message } from 'antd';
 import { IDisconnected, IParticipantCount, ILayout, IScreenInfo, IAudioTrack, ICallStatus, IAudioStatus, IRoster } from '../type/index';
 import { ENV, SERVER, ACCOUNT, THIRD } from '../utils/config';
 import xyRTC from 'xy-rtc-sdk';
-import Video from './Video';
-import Audio from './Audio';
+import Video from './video';
+import Audio from './audio';
 import Internels from './Internels';
 import store from '../utils/store';
 import Login from './Login';
@@ -168,8 +168,14 @@ function Home() {
 
       if (code === 10518) {
         message.info(msg);
-
         setCallLoading(false);
+
+        client.muteVideo();
+        setVideo('muteVideo');
+
+        client.muteAudio();
+        setVideo('mute');
+
       } else if (code === 10519) {
         message.info(msg);
       } else {
@@ -261,7 +267,7 @@ function Home() {
           clientSecret
         });
       } else {
-        return;
+        result = await client.loginXYlinkAccount(user.phone, user.password);
       }
 
       if (result.code === 10104) {
@@ -290,7 +296,6 @@ function Home() {
       if (callStatus) {
         stream = xyRTC.createStream();
         await stream.init();
-
         client.publish(stream, { isSharePeople: true });
       }
 

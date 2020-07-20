@@ -42,7 +42,7 @@ const Login: React.FC<any> = (props: any) => {
             rules={[{ required: true, message: 'Please input your Password!' }]}
           >
             <Input
-              type="text"
+              type="password"
               placeholder="登录密码"
               onChange={(e) => {
                 onChangeInput(e, 'password')
